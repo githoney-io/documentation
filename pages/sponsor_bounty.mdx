@@ -1,0 +1,23 @@
+import { Callout } from "nextra/components";
+
+## For Sponsors: Fund a Bounty 🍯
+
+Want to help a project reach its goals faster? Or show your appreciation for a particular issue? You can add extra funds to any existing bounty on Githoney!
+
+**Using the fund-bounty Command**
+
+1. Navigate to the GitHub issue where the bounty is attached.
+2. Add a comment starting with `/githoney` and using the `fund-bounty` command.
+
+**Parameters:**
+
+- `tokens`: Specify the amount of ADA you want to add. (Currently, only ADA is supported. Format: `tokenA=amountA`)
+- `address`: The Cardano wallet address from which the funds will be sent.
+
+**Example:**
+
+The following command will add 500 ADA to the bounty from the specified wallet address. Currently only ADA token is accepted. 
+
+```
+/githoney fund-bounty --tokens ADA=500 --address addr1xxx
+```

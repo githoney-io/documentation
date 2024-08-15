@@ -1,0 +1,27 @@
+import { Callout } from "nextra/components";
+import { Accordion } from "nextra/components";
+
+# GitHub Setup
+
+To start using GitHoney, you need to add the Github App to your organization. This will allow the bot to respond to commands to manage the bounties.
+
+Follow these steps to configure the app:
+1. Head over to the GitHub app
+   [installation page](https://github.com/apps/githoney-io)
+2. Click on the **Install** button.
+3. Choose your organization from the list where you want to install GitHoney.
+4. Select the repositories where you'd like to apply bounties (you can choose all repositories or specific ones).
+5. Click the final "Install" button to confirm the process
+
+<Accordion type="info" title="Permissions">
+
+During installation, the GitHub App will request the following permissions:
+
+*   **Read access to metadata and organization custom properties:** This allows the bot to understand your repository structure and settings.
+*   **Read and write access to issues and pull requests:** This is essential for the bot to interact with bounties, post comments, and update issue statuses.
+
+</Accordion>
+
+## Congratulations! 
+
+You've successfully installed and configured the GitHoney GitHub App for your organization. Now you can start using the app to manage bounties for your open-source projects. 🐝

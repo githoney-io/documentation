@@ -1,0 +1,80 @@
+import { Callout } from "nextra/components";
+
+# Bot Command reference
+
+The GitHoney bot interactions can be thought as analogous to interacting
+with a CLI, with the big difference that commands and outputs are expressed as
+Github comments in the corresponding issue.
+
+## `attach-bounty`
+
+This command should only be executed in Github issues, otherwise it will throw an
+error. It will specify the reward of the bounty and the duration of it.
+Whoever comments will be the **maintainer** of the bounty and should sign the
+transaction. The response will be a comment with the bounty id that could be
+used to accept the bounty.
+
+### Args
+
+- `amount`: the amount in ADA that the contributor will obtain once the
+  bounty tasks have been completed. The minimum value is 10 ADA.
+- `deadline`: The duration (in days) from the creation of the bounty that the
+  contributor has available to complete the task. The minimum value is 6 days.
+- `address` the address of the wallet that will be used to deposit the reward in
+  the contract.
+- `network` the network on which the contract will be created. It only accepts
+  two values `preprod` and `mainnet`. If this parameter is ignored, it will be
+  set to "preprod" by default.
+
+<Callout type="warning">
+  If the address format does not match with the network, the contract creation
+  will fail.
+</Callout>
+
+Here's the example of a comment that can be used to create a bounty in mainnet that
+provides a reward of 5000 ADA, that needs to fulfilled within 60 days and that will
+be deposited from the address `addr1xxx`.
+
+```
+/githoney attach-bounty --amount 5000 --address addr1xxx --deadline 60 --network mainnet
+```
+
+## `fund-bounty`
+
+This command should only be executed in Github issues, otherwise it will throw an
+error. Allows any user to deposit more rewards to the bounty, this user will become
+a sponsor and should sign the transaction.
+
+### Args
+
+- `tokens`: the list of tokens and their quantity to add, for now, only ADA is supported.
+  The format is `tokenA=amountA&tokenB=amountB&...&tokenZ=amountZ`.
+- `address` the address of the wallet that will be used to deposit the reward in
+  the contract.
+
+Here's the example of a comment that can be used to fund a reward with 500 extra
+ADA and will be deposited from the address `addr1xxx`.
+
+```
+/githoney fund-bounty --tokens ADA=500 --address addr1xxx
+```
+
+## `accept-bounty`
+
+This command should only be executed in Github pull requests, otherwise it will
+throw an error. Allows any user to become the bounty contributor, that is, the person
+who will solve the task.
+
+### Args
+
+- `bountyId`: the id of the bounty, which can be found in the bot response of the
+  `attach-bounty` comment in the issue that describes the task.
+- `address`: the address of the wallet that will be used to claim the reward when
+  the task is completed and the pull request merged.
+
+Here's the example of a comment that can be used to accept the bounty with id `123`
+using the address `addr1xxx`.
+
+```
+/githoney accept-bounty --bountyId 123 --address addr1xxx
+```

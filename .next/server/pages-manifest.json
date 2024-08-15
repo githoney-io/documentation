@@ -1,0 +1,10 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/onchain_contract": "pages/onchain_contract.js",
+  "/sponsor_bounty": "pages/sponsor_bounty.js",
+  "/claim_reward": "pages/claim_reward.js",
+  "/accept_bounty": "pages/accept_bounty.js",
+  "/": "pages/index.js"
+}
