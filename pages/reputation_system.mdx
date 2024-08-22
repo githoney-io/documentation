@@ -1,0 +1,43 @@
+import { Callout } from "nextra/components";
+
+# Reputation System
+
+Githoney uses a reputation system to recognize and reward contributions from both maintainers and contributors. Your reputation score helps build trust and showcase your track record on the platform.
+
+
+## How It Works
+
+- Three Roles, Three Scores: Users have separate reputation scores for their roles as contributors, maintainers and sponsors.
+- Earning Points: You earn points for completing bounties, creating bounties that get fulfilled, and sponsoring bounties.
+- Losing Points: You might lose points for uncompleted claimed bounties, missed deadlines, or other actions that negatively impact the community.
+
+## Reputation Changes
+
+Here's a breakdown of how reputation points are calculated for different actions:
+
+- On Merge (Bounty Completed)
+    - Maintainer (Bounty Creator):
+        - +5 points for creating the bounty
+        - +5 points for successful completion
+        - +1 point for every 100 ADA deposited in the bounty
+    - Contributor:
+        - +10 points for completing the bounty
+        - +1 point for their current streak level (0 to 3)
+        - +1 point for every 100 ADA in the bounty
+    - Sponsor:
+        - +1 point for the bounty being completed
+        - +1 point for every 100 ADA they sponsored
+- On Close (A Claimed Bounty Closed without Merge)
+    - Maintainer: -10 points
+- On Deadline (A Claimed Bounty Expires)
+    - Contributor:
+        - -5 points for not completing the bounty
+        - -1 point for every 200 ADA in the bounty
+
+
+
+<Callout type="info">
+
+This is the initial version of the reputation system, and it will evolve based on community feedback and usage patterns.
+
+</Callout>
