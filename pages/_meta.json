@@ -23,6 +23,7 @@
     "title": "How it Works"
   },
   "reputation_system": "Reputation system",
+  "badges": "Badges",
   "onchain_contract": "On-chain contract",
   "bot_commands": "Bot commands"
 }
