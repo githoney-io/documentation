@@ -12,31 +12,30 @@ constraing for the issue, it can follow whatever conventions or good practices
 you have defined for your organization / repository.
 
 For bug fixes, we recommend to include:
+
 - Clear reproduction steps.
 - Expected outcomes or acceptance criteria.
 
 For new features, describe:
+
 - All requirements.
 - A clear definition of "done."
 
 This clarity helps potential contributors understand the task and increases the chances of a successful outcome.
 
-## Attach a bounty
+## Create a bounty
 
 Once you have created the issue that represents the work, the next step is
-to attach a bounty. You can do that by adding a comment in the issue that
-starts with `/githoney` and calls the `attach-bounty` command.
+to create a bounty. You can do that by adding a comment in the issue that
+starts with `/githoney` and calls the `create-bounty` command.
 
-The `attach-bounty` command requires you to define the following parameters:
+The `create-bounty` command requires you to define the following parameters:
 
-- `amount`: The size of the bounty in ADA currency. The developer who fulfills
- the bounty will receive 95% of this amount. (Minimum: 10 ADA)
-- `deadline`: The time interval in days starting now that the contributor has available
-  to fulfill the task. (Minimum: 6 days)
+- `tokens`: Specify the amount of tokens you want to add. (Currently, only ADA is supported. Format: `tokenA=amountA`).
+  The developer who fulfills the bounty will receive 95% of this tokens. (Minimum: ADA=10)
 - `address`: Your Cardano wallet address to fund the bounty.
-- `network` The network on which the contract will be created. It only accepts
-  two values `preprod` and `mainnet`. If this parameter is ignored, it will be
-  set to "preprod" by default.
+- `duration`: The time interval in days starting now that the contributor has available
+  to fulfill the task. (Minimum: 5 days)
 
 <Callout type="warning">
   If the address format does not match with the network, the contract creation
@@ -45,10 +44,10 @@ The `attach-bounty` command requires you to define the following parameters:
 
 Here's the example of the body of a comment that can be used to attach a bounty
 in mainnet that provides a reward of 500 ADA, that needs to fulfilled within 60
-days and that will be deposited from the address `addr1xxx`.
+days and that will be deposited from the address `addr1*`.
 
 ```
-/githoney attach-bounty --amount 500 --address addr1q9dmgalc57pqpehn3pmgexawztyrw2tckwhavpexpp35tsey05ppwrzmf2kmjwjecj30xtgfezzghtzmqkttyfu3ragqrlsz3d --deadline 60 --network mainnet
+/githoney create-bounty --tokens ADA=200 --address addr1* --duration 14
 ```
 
 <Callout type="info">
@@ -60,7 +59,7 @@ The GitGoney bot will acknowledge your command with a 👍. It'll then create a 
 
 ## Deposit the reward
 
-To execute the deposit, click the link provided by the bot in response to the `attach-bounty` command. This will lead you to a straightforward web page that presents the required on-chain transaction for your signature. Ensure that the wallet you use corresponds to the address you provided in the `attach-bounty` command.
+To execute the deposit, click the link provided by the bot in response to the `create-bounty` command. This will lead you to a straightforward web page that presents the required on-chain transaction for your signature. Ensure that the wallet you use corresponds to the address you provided in the `create-bounty` command.
 
 One of the main advantages of using on-chain contract is providing strong enough
 guarantees for all parties involved that the conditions of the bounty will be
@@ -73,12 +72,14 @@ the on-chain contract to release reward without any actions required from the
 maintainer side.
 
 <Callout type="info" emoji="🍯">
-  **Project Sustainability:** To keep the Githoney hive thriving, a small fee - 5% of the bounty amount upon completion plus a fixed 2 ADA initiation fee - is collected. This supports the platform's ongoing operation and development. If the bounty is canceled or remains unfulfilled, the 5% facilitation fee is not deducted.
+  **Project Sustainability:** To keep the Githoney hive thriving, a small fee -
+  5% of the bounty amount upon completion plus a fixed 2 ADA initiation fee - is
+  collected. This supports the platform's ongoing operation and development. If
+  the bounty is canceled or remains unfulfilled, the 5% facilitation fee is not
+  deducted.
 </Callout>
 
 **Important Notes:**
 
-- Refunds:  If the bounty is not completed or is canceled by you, the maintainer, you can reclaim your deposited ADA, minus the 2 ADA initiation fee. 
-- Wallet Match:  Ensure you use the same wallet address you specified in the `attach-bounty` command when making the deposit.
-
-
+- Refunds: If the bounty is not completed or is canceled by you, the maintainer, you can reclaim your deposited ADA, minus the 2 ADA initiation fee.
+- Wallet Match: Ensure you use the same wallet address you specified in the `create-bounty` command when making the deposit.
