@@ -12,6 +12,7 @@
     "title": "For Contributors"
   },
   "accept_bounty": "Accept bounty",
+  "link_bounty": "Link bounty",
   "claim_reward": "Claim reward",
   "-- For Sponsors --": {
     "type": "separator",

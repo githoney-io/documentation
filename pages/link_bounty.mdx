@@ -1,0 +1,32 @@
+import { Callout } from "nextra/components";
+
+# Link a PR with a bounty
+
+This guide will explain how contributors can link a Github PR with an accepted bounty.
+
+## Link your PR
+
+Once you've accepted a bounty, you should start working on it.
+When you're ready to submit your work, just create a Github PR that references the issue.
+
+You can do this by adding a comment in the PR that starts with
+`/githoney` and calls the `link-bounty` command.
+
+The `link-bounty` command has the following parameters:
+
+- `bountyId`: the id of the bounty, which can be found as a
+  comment by the bot in the issue that describes the task.
+
+**Example:**
+
+```
+/githoney link-bounty --bountyId 111
+```
+
+<Callout type="info">
+  For detailed information on available commands please refer to the [Bot
+  commands](./bot_commands) section of the documentation.
+</Callout>
+
+The Githoney bot will give you a thumbs-up 👍 once it receives your command.
+It will then link the PR with the bounty, so the maintainer can review your work and approve the PR.
