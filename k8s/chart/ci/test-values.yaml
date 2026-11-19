@@ -8,3 +8,14 @@ ingress:
   clusterIssuer: letsencrypt
   host: docs.example.com
   tlsSecretName: docs-example-com-tls
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: 1m
+env:
+  NEXT_TELEMETRY_DISABLED: "1"
+nodeSelector:
+  kubernetes.io/os: linux
+tolerations:
+  - key: example.com/dedicated
+    operator: Equal
+    value: docs
+    effect: NoSchedule

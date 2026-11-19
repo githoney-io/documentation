@@ -21,7 +21,8 @@ image:
 replicaCount: 1
 port: 3000
 
-# Extra plain environment variables.
+# Extra plain environment variables. PORT comes from `port` above; setting
+# env.PORT fails the render.
 env: {}
 
 resources:

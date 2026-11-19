@@ -34,6 +34,9 @@ spec:
           ports:
             - name: http
               containerPort: {{ .Values.port | int }}
+          {{- if hasKey .Values.env "PORT" }}
+          {{- fail "env.PORT is not supported: set port, which also drives containerPort and the probes" }}
+          {{- end }}
           env:
             {{- range $key, $value := merge (dict) (dict "PORT" .Values.port) .Values.env }}
             - name: {{ $key }}
