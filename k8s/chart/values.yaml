@@ -1,0 +1,60 @@
+# The GitHoney documentation site, built by .github/workflows/docker-image.yml
+# into ghcr.io from the root Dockerfile. It serves `next start` on port 3000
+# and needs no secret.
+#
+# These defaults are instance-agnostic: no cluster, hostname or image is
+# assumed. What an instance must supply is empty here and `required` in the
+# templates, so a missing value fails at render instead of deploying a
+# half-configured service.
+
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  repository: ghcr.io/githoney-io/documentation
+  # The workflow tags every image sha-<short commit>. Pin a tag and its
+  # digest; never a moving tag.
+  tag: ""
+  digest: ""
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+port: 3000
+
+# Extra plain environment variables.
+env: {}
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    memory: 512Mi
+
+nodeSelector: {}
+tolerations: []
+
+podSecurityContext:
+  seccompProfile:
+    type: RuntimeDefault
+# The image runs as root and Next.js writes its cache under /code/.next, so
+# the root filesystem stays writable.
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: ["ALL"]
+
+service:
+  type: ClusterIP
+  port: 3000
+  annotations: {}
+
+ingress:
+  enabled: false
+  className: ""
+  clusterIssuer: ""
+  host: ""
+  path: /
+  pathType: Prefix
+  tlsSecretName: ""
+  annotations: {}

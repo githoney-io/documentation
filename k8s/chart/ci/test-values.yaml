@@ -1,0 +1,10 @@
+# Render and lint fixture: placeholder values, not a real instance.
+image:
+  tag: sha-0967e54
+  digest: sha256:0000000000000000000000000000000000000000000000000000000000000000
+ingress:
+  enabled: true
+  className: nginx
+  clusterIssuer: letsencrypt
+  host: docs.example.com
+  tlsSecretName: docs-example-com-tls
