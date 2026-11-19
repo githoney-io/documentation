@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "docs.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "docs.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "docs.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "docs.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: docs
+          image: {{ include "docs.image" . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.port | int }}
+          {{- if hasKey .Values.env "PORT" }}
+          {{- fail "env.PORT is not supported: set port, which also drives containerPort and the probes" }}
+          {{- end }}
+          env:
+            {{- range $key, $value := merge (dict) (dict "PORT" .Values.port) .Values.env }}
+            - name: {{ $key }}
+              value: {{ $value | toString | quote }}
+            {{- end }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 20
+            failureThreshold: 3
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}

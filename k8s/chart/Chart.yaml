@@ -1,0 +1,11 @@
+apiVersion: v2
+name: githoney-docs
+description: The GitHoney documentation site (Next.js and Nextra)
+type: application
+# Chart version: this chart. appVersion: not tracked; the image is pinned in
+# the instance values.
+version: 0.1.0
+home: https://github.com/githoney-io/documentation
+keywords:
+  - githoney
+  - docs

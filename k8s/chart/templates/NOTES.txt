@@ -1,0 +1,9 @@
+{{ .Chart.Name }} {{ .Chart.Version }} ({{ .Values.image.tag }})
+  in-cluster: http://{{ include "docs.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}/
+{{- if .Values.ingress.enabled }}
+  public:     https://{{ .Values.ingress.host }}{{ .Values.ingress.path }}
+{{- end }}
+
+Smoke test:
+  kubectl -n {{ .Release.Namespace }} port-forward svc/{{ include "docs.fullname" . }} 13000:{{ .Values.service.port }}
+  curl -s -o /dev/null -w '%{http_code}\n' http://localhost:13000/     # 200
